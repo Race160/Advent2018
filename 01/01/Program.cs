@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace _01
 {
@@ -7,6 +8,8 @@ namespace _01
         static void Main(string[] args)      
         {
             Console.WriteLine($"{Part1()}");
+
+            Console.WriteLine($"{Part2()}");
 
             Console.Read();         
         }
@@ -23,6 +26,36 @@ namespace _01
             }
 
             return total;
+        }
+
+        static int? Part2()
+        {
+            string[] lines = System.IO.File.ReadAllLines("TextFile1.txt");
+
+            int? repeat = null;
+            int frequency = 0;
+
+            List<int> values = new List<int>();
+
+            while(repeat == null)
+            {
+                foreach (string line in lines)
+                {
+                    frequency += Int32.Parse(line);
+
+                    if (values.Contains(frequency))
+                    {
+                        repeat = frequency;
+
+                        break;
+                    }
+                    else
+                    {
+                        values.Add(frequency);
+                    }
+                }
+            }            
+            return repeat;
         }
     }
 }
